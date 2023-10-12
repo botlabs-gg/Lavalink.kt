@@ -17,6 +17,6 @@ jobs:
       - name: Publish package
         uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629
         with:
-          arguments: core:publishAllPublicationsToGitHubPackagesRepository
+          arguments: core:publishAllPublicationsToGitHubPackagesRepository -Pversion=${{ github.sha }}-SNAPSHOT
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
