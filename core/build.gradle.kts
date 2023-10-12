@@ -6,6 +6,7 @@ plugins {
     `lavalink-publishing`
     kotlin("plugin.serialization")
     id("kotlinx-atomicfu")
+    id("maven-publish")
 }
 
 kotlin {
@@ -72,4 +73,17 @@ kotlin {
 
 mavenPublishing {
     configure(KotlinMultiplatform(JavadocJar.Dokka("dokkaHtml")))
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = "https://maven.pkg.github.com/botlabs-gg/lavalink.kt"
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
 }
