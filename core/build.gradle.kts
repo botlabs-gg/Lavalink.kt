@@ -1,5 +1,6 @@
 import com.vanniktech.maven.publish.JavadocJar
 import com.vanniktech.maven.publish.KotlinMultiplatform
+import java.net.URI
 
 plugins {
     `lavalink-module`
@@ -79,7 +80,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = "https://maven.pkg.github.com/botlabs-gg/lavalink.kt"
+            url = URI("https://maven.pkg.github.com/botlabs-gg/lavalink.kt")
             credentials {
                 username = System.getenv("GITHUB_ACTOR")
                 password = System.getenv("GITHUB_TOKEN")
