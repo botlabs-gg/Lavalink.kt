@@ -10,6 +10,7 @@ plugins {
 }
 
 group = "dev.schlaubi.lavakord"
+version = project.findProperty("version") ?: "SNAPSHOT"
 
 allprojects {
     repositories {
