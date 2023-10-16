@@ -4,11 +4,13 @@ import java.net.URI
 
 plugins {
     `lavalink-module`
-    `lavalink-publishing`
     kotlin("plugin.serialization")
     id("kotlinx-atomicfu")
     id("maven-publish")
 }
+
+group = "dev.arbjerg.lavalink-kt"
+version = "5.2.0-botlabs-SNAPSHOT"
 
 kotlin {
     sourceSets {
@@ -72,18 +74,14 @@ kotlin {
     }
 }
 
-mavenPublishing {
-    configure(KotlinMultiplatform(JavadocJar.Dokka("dokkaHtml")))
-}
-
 publishing {
     repositories {
         maven {
-            name = "GitHubPackages"
-            url = URI("https://maven.pkg.github.com/botlabs-gg/lavalink.kt")
+            name = "Ossrh"
+            url = URI("https://s01.oss.sonatype.org/content/repositories/snapshots/")
             credentials {
-                username = System.getenv("GITHUB_ACTOR")
-                password = System.getenv("GITHUB_TOKEN")
+                username = findProperty("ossrhPassword") as? String
+                password = findProperty("ossrhUsername") as? String
             }
         }
     }
