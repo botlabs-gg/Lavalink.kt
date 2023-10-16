@@ -152,7 +152,7 @@ internal class NodeImpl(
             connect(resume)
         } else {
             lavakord.removeNode(this)
-            throw RuntimeException("Could not reconnect to websocket after to many attempts", e)
+            throw IllegalStateException("Could not reconnect to websocket after too many attempts", e)
         }
     }
 

@@ -134,7 +134,7 @@ public data class MutableLavaKordOptions(
      */
     public data class LinkConfig(
         override var autoReconnect: Boolean = true,
-        override val autoMigrateOnDisconnect: Boolean = true,
+        override var autoMigrateOnDisconnect: Boolean = true,
         override var resumeTimeout: Int = 60,
         override var retry: Retry = LinearRetry(2.seconds, 60.seconds, 10),
         override val showTrace: Boolean = false
