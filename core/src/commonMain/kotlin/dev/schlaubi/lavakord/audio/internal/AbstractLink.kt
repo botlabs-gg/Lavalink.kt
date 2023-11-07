@@ -10,6 +10,7 @@ import dev.schlaubi.lavakord.audio.player.Player
 import dev.schlaubi.lavakord.audio.player.node
 import dev.schlaubi.lavakord.rest.destroyPlayer
 import dev.schlaubi.lavakord.rest.updatePlayer
+import mu.KotlinLogging
 
 /**
  * Abstract implementation of [Link].
@@ -23,6 +24,10 @@ public abstract class AbstractLink(node: Node, final override val guildId: ULong
     abstract override val lavakord: AbstractLavakord
     override var lastChannelId: ULong? = null
     override var state: State = State.NOT_CONNECTED
+        set(value) {
+            LOG.debug { "$this: $state -> $value" }
+            field = value
+        }
     private var cachedVoiceState: VoiceState? = null
 
     override suspend fun onDisconnected() {
@@ -32,6 +37,7 @@ public abstract class AbstractLink(node: Node, final override val guildId: ULong
     }
 
     override suspend fun onNewSession(node: Node) {
+        LOG.debug { "$this: new session ${this.node} -> $node" }
         this.node = node
         val voiceState = cachedVoiceState
 
@@ -39,6 +45,7 @@ public abstract class AbstractLink(node: Node, final override val guildId: ULong
 
         try {
             (player as WebsocketPlayer).recreatePlayer(node as NodeImpl, voiceState)
+            LOG.debug { "$this: recreated player on $node" }
             if (voiceState != null) {
                 state = State.CONNECTED
             }
@@ -60,7 +67,14 @@ public abstract class AbstractLink(node: Node, final override val guildId: ULong
     }
 
     internal suspend fun onVoiceServerUpdate(update: VoiceState) {
+        LOG.debug { "$this: Voice server update, sending to $node" }
         cachedVoiceState = update
         node.updatePlayer(guildId, request = PlayerUpdate(voice = update.toOmissible()))
+    }
+
+    override fun toString(): String = "Link($guildId)"
+
+    private companion object {
+        internal val LOG = KotlinLogging.logger { }
     }
 }
