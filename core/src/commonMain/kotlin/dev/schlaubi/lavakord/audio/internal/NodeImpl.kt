@@ -136,7 +136,7 @@ internal class NodeImpl(
 
         available = false
         val reason = session.closeReason.await()
-        val resumeAgain = resume && reason?.knownReason != CloseReason.Codes.NORMAL
+        val resumeAgain = false//resume && reason?.knownReason != CloseReason.Codes.NORMAL
         if (resumeAgain) {
             LOG.warn { "$name disconnected from websocket for: $reason. Music will continue playing if we can reconnect within the next $resumeTimeout seconds" }
         } else {
@@ -208,13 +208,13 @@ internal class NodeImpl(
                 available = true
                 sessionId = event.sessionId
                 lavakord.onNewSession(this)
-                updateSession(
+                /*updateSession(
                     SessionUpdate(
                         resuming = true.toOmissible(),
                         timeoutSeconds = lavakord.options.link.resumeTimeout
                             .toLong().toOmissible()
                     )
-                )
+                )*/
             }
         }
     }
