@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "dev.arbjerg.lavalink-kt"
-version = "5.2.7-botlabs-SNAPSHOT"
+version = "5.2.8-botlabs-SNAPSHOT"
 
 kotlin {
     sourceSets {
