@@ -5,6 +5,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     `lavalink-module`
     `lavalink-publishing`
+    kotlin("plugin.serialization")
     alias(libs.plugins.ksp)
 }
 
@@ -16,7 +17,6 @@ kotlin {
             }
         }
     }
-
     sourceSets {
         all {
             languageSettings.optIn("kotlin.contracts.ExperimentalContracts")
@@ -27,14 +27,17 @@ kotlin {
             kotlin.srcDir(layout.buildDirectory.dir("generated/ksp/metadata/commonMain/kotlin"))
             dependencies {
                 api(projects.core)
-                api(libs.lavasrc.protocol)
+                api(libs.lavasearch.protocol)
+
+                implementation(libs.ktor.client.resources)
+                implementation(libs.kord.ksp.annotations)
             }
         }
     }
 }
 
 dependencies {
-    kspCommonMainMetadata(projects.plugins.kspProcessor)
+    kspCommonMainMetadata(libs.kord.ksp.processors)
 }
 
 tasks {

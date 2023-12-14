@@ -7,10 +7,11 @@ plugins {
     kotlin("plugin.serialization")
     id("kotlinx-atomicfu")
     id("maven-publish")
+    alias(libs.plugins.ksp)
 }
 
 group = "dev.arbjerg.lavalink-kt"
-version = "6.0.0-botlabs-SNAPSHOT"
+version = "6.0.1-botlabs-SNAPSHOT"
 
 kotlin {
     sourceSets {
@@ -18,6 +19,7 @@ kotlin {
             languageSettings.optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
         }
         commonMain {
+            kotlin.srcDir(layout.buildDirectory.dir("generated/ksp/metadata/commonMain/kotlin"))
             dependencies {
                 api(libs.kotlinx.coroutines.core)
                 api(libs.kotlinx.serialization.json)
@@ -34,6 +36,8 @@ kotlin {
                 implementation(libs.ktor.client.logging)
 
                 implementation(libs.kotlinlogging)
+
+                compileOnly(libs.codegen.ksp.annotations)
             }
         }
 

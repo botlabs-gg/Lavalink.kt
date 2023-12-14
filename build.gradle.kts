@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "dev.schlaubi.lavakord"
-version = project.findProperty("version") ?: "SNAPSHOT"
+version = "6.0.0"
 
 allprojects {
     repositories {
@@ -18,6 +18,7 @@ allprojects {
         maven("https://maven.pkg.jetbrains.space/public/p/kotlinx-html/maven")
         maven("https://oss.sonatype.org/content/repositories/snapshots")
         maven("https://maven.topi.wtf/snapshots")
+        maven("https://maven.topi.wtf/releases")
     }
 }
 
