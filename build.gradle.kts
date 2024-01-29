@@ -19,7 +19,7 @@ allprojects {
         maven("https://oss.sonatype.org/content/repositories/snapshots")
         maven("https://maven.topi.wtf/snapshots")
         maven("https://maven.topi.wtf/releases")
-        maven("https://maven.lavalink.dev/releases")
+        maven("https://maven.lavalink.dev/snapshots")
     }
 }
 

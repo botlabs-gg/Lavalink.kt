@@ -55,7 +55,7 @@ dependencyResolutionManagement {
 
             library("kotlinx-nodejs", "org.jetbrains.kotlin-wrappers", "kotlin-node").version("18.16.12-pre.594")
 
-            library("lavalink-protocol", "dev.arbjerg.lavalink", "protocol").version("2cbe1bbfa645e54b5f3f07dcb9fea5810abe912b-SNAPSHOT")
+            library("lavalink-protocol", "dev.arbjerg.lavalink", "protocol").version("6560834b31d70ee1c89907d925df7bc2b0613480-SNAPSHOT")
             library(
                 "lavasearch-protocol",
                 "com.github.topi314.lavasearch",
